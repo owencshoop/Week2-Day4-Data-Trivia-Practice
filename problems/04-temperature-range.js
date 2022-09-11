@@ -31,14 +31,14 @@ methods. Can you use helper methods to separate out the logic?
 */
 const monthlyRange = (array) => {
   let monthlyTempRanges = [];
-  let months = ["January", 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  array.forEach((ele, index) => monthlyTempRanges.push({'month': months[index], 'high': ele.high, 'low': ele.low, 'range': ((ele.high) - (ele.low))}));
+  let months = ["January", 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  array.forEach((ele, index) => monthlyTempRanges.push({'month': months[index], 'high': ele.high, 'low': ele.low, 'range': ele.high - ele.low}));
   return monthlyTempRanges;
 }
 
 const temperatureRange = (arr) => {
   let newClimateData = [...arr];
-  newClimateData.forEach((ele) => ele.monthlyTemperatureRange = monthlyRange(ele.monthlyAvg));
+  newClimateData.forEach((ele) => ele['monthlyTemperatureRange'] = (monthlyRange(ele.monthlyAvg)));
   newClimateData.forEach((ele) => delete ele.monthlyAvg);
   console.log(arr[13])
   return newClimateData;
